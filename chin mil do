@@ -1,0 +1,36 @@
+import random
+a=[1,2,3,4,5,6,7,8]
+HG=[]
+f=[]
+
+random.shuffle(a)
+while len(HG) % 2 == 0:
+    for i in range(0,int(len(a)/2)) :
+        b=a.pop()
+        c=a.pop()
+        print('(1)',b)
+        print('(2)',c)
+        d=int(input('1과 2 중 더 친한 사람을 고르세요'))
+        if d == 1 :
+            HG.append(b)
+            f.append(c)
+        if d == 2 :
+            HG.append(c)
+            f.append(b)
+    print(HG)
+    a = HG
+    if len(a)==1:
+        break
+    HG=[]
+    
+f.append(a.pop())
+f.reverse()
+print(f)
+SSL = {}
+S = len(f)
+while S % 2 == 0 :
+    for i in range(1,int(S / 2) + 1) :
+        SSL[f.pop()] = 128 / S
+    S = S / 2
+SSL[f.pop()] = 128
+SSL[int(input())] 
