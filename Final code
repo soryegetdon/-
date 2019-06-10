@@ -1,0 +1,94 @@
+import random
+import csv
+import copy    
+fm=[]
+f=open('data.csv','r',encoding='utf-8')
+rdr = csv.reader(f)
+for line in rdr:
+    lin=line.pop()
+    fm.append(lin)
+    
+f.close()  
+
+HG=[]
+f=[]
+
+
+class subjectgrade :
+    def __init__(self,subject,number):
+        self.subject=subject
+        self.number=number
+        self.people=[]
+    def cutandrandom(self):
+        random.shuffle(fm)
+        for i in range(0,int(self.number)):
+            j=fm.pop()
+            self.people.append(j)
+        return self.people
+    def info(self):
+        print(len(self.people))
+        print(self.people)
+        print(self.subject)
+        
+subject=input('수학, 물리, 화학, 생물, 지학 중 하나의 과목을 선택하십시오.')
+number=input('비교할 학생수를 제한해 주십시오 2^n명만 가능합니다.')
+bj=input('친밀도 대비 성적의 비율을 얼마나 둘지 설정하십시오. 값이 클수록 성적의 영향이 커집니다.')
+p=subjectgrade(subject,number)
+rfm=p.cutandrandom()
+rfm1=copy.deepcopy(rfm)
+p.info()
+
+while len(HG) % 2 == 0:
+    for i in range(0,int(len(rfm)/2)) :
+        b=rfm.pop()
+        c=rfm.pop()
+        print('(1)',b)
+        print('(2)',c)
+        d=int(input('1과 2 중 더 친한 사람을 고르세요'))
+        if d == 1 :
+            HG.append(b)
+            f.append(c)
+        if d == 2 :
+            HG.append(c)
+            f.append(b)
+    print(HG)
+    rfm = HG
+    if len(rfm)==1:
+        break
+    HG=[]
+
+f.append(rfm.pop())
+f.reverse()
+print(f)
+    
+
+SSL = {}
+S = len(f)
+
+while S % 2 == 0 :
+    for i in range(1,int(S / 2) + 1) :
+        SSL[f.pop()] = 128 / S
+    S = S / 2
+SSL[f.pop()] = 128
+print(SSL)
+
+
+SJSSL = {}
+for i in range(0,int(len(rfm1))) :
+    SJSSL[rfm1[i]]=float("%0.1f" % float((int(len(rfm1))-i)*(128/int(number)+0.1)))
+print(SJSSL)#성적보여줌
+
+dic = {}
+for i in rfm1 :
+    dic[i] = SSL[i] + SJSSL[i]
+print(dic)
+
+
+import operator
+sortedArr = sorted(dic.items(), key=operator.itemgetter(1),reverse=True)
+print(sortedArr)
+
+
+print(sortedArr[0])
+print(sortedArr[1])
+print(sortedArr[2])
