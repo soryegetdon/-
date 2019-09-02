@@ -3,8 +3,9 @@ a=[1,2,3,4,5,6,7,8]
 HG=[]
 f=[]
 
-random.shuffle(a)
-while len(HG) % 2 == 0:
+
+random.shuffle(a) #랜덤으로 학생을 고른뒤에 더 친한사람을 고르는 이상형 월드컵 같은 함수
+while len(HG) % 2 == 0: 
     for i in range(0,int(len(a)/2)) :
         b=a.pop()
         c=a.pop()
@@ -23,10 +24,11 @@ while len(HG) % 2 == 0:
         break
     HG=[]
     
-f.append(a.pop())
-f.reverse()
+f.append(a.pop()) #a에서 뽑은 친구들을 넣는 f 리스트에 넣는 작업 
+f.reverse() #친한순위대로 나열하는 리버스 함수
 print(f)
-SSL = {}
+
+SSL = {} # 뽑은 학생들을 가지고 각 단계를 나눠서 점수를 부여하는 단계
 S = len(f)
 while S % 2 == 0 :
     for i in range(1,int(S / 2) + 1) :
@@ -35,7 +37,7 @@ while S % 2 == 0 :
 SSL[f.pop()] = 128
 SSL[int(input())] 
 
-SJ = [1, 2, 3, 4, 5, 6, 7, 8]
+SJ = [1, 2, 3, 4, 5, 6, 7, 8] # 전체 학생에게 성적순으로 점수를 부여하는 함수
 SJSSL = {}
 S2 = len(SJ)
 while S2 % 2 == 0 :
